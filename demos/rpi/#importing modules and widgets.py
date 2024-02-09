@@ -50,10 +50,7 @@ class MainWindow(QWidget):
 
         self.layout_line = QVBoxLayout()
 
-        coloum1 = QWidget()
-        coloum2 = QWidget()
-        coloum3 = QWidget()
-        coloum4 = QWidget()
+
         coloum1_layout = QVBoxLayout()
         coloum2_layout = QVBoxLayout()
         coloum3_layout = QVBoxLayout()

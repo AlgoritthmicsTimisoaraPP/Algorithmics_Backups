@@ -2,6 +2,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QLineEdit
  
+from PyQt5 import *
 #declaring constants
 win_width, win_height = 250, 500
 win_x, win_y = 200, 200
@@ -10,7 +11,7 @@ txt_line = "0"
 
 class MainWindow(QWidget):
     value = 0
-    def __init__(self, parent=None, flags=Qt.WindowFlags()):
+    def __init__(self, parent=None, flags=QtCore.Qt.WindowFlags()):
         super().__init__(parent=parent, flags=flags)
         # creating and customizing the graphical elements:
         self.initUI()
@@ -25,6 +26,9 @@ class MainWindow(QWidget):
  
     def initUI(self):
         ''' creates graphical elements '''
+        self.setFixedWidth(win_width)
+        self.setFixedHeight(win_height)
+        qestion = QLabel("Question:")
         btn_add = QPushButton("+", self)
         btn_scad = QPushButton("-", self)
         btn_div = QPushButton("/", self)
@@ -37,33 +41,13 @@ class MainWindow(QWidget):
         btn_6 = QPushButton("6", self)        
         btn_7 = QPushButton("7", self)
         btn_8 = QPushButton("8", self)
+        btn_8.resize(200,200)
 
-        v1 = QVBoxLayout()
-        v2 = QVBoxLayout()
-        v3 = QVBoxLayout()
-        v4 = QVBoxLayout()
+        self.main_layout = QVBoxLayout()
+        self.main_layout.addWidget(btn_8)
+        self.main_layout.addWidget(btn_7)
+        self.setLayout(self.main_layout)
 
-        v1.addWidget(btn_7)
-        v1.addWidget(btn_4)
-        v1.addWidget(btn_1)
-
-        v2.addWidget(btn_8)
-        v2.addWidget(btn_5)
-        v2.addWidget(btn_2)
-
-        w1 = QWidget()
-        w2 = QWidget()
-
-
-        w1.setLayout(v1)
-        w2.setLayout(v2)
-
-        
- 
-        self.layout_line = QHBoxLayout()
-        self.layout_line.addWidget(w1,  alignment = Qt.AlignCenter)
-        self.layout_line.addWidget(w2,  alignment = Qt.AlignCenter)         
-        self.setLayout(self.layout_line)
  
  
     
