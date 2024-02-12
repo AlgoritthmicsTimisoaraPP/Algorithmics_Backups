@@ -1,20 +1,27 @@
 from pygame import *
 from Character import CharacterSprite
 from Enemy import EnemySprite
+from Wall import Wall
 
-
-window = display.set_mode((700, 500))
+window = display.set_mode((1200, 800))
 display.set_caption("Catch")
 
-background = transform.scale(image.load("c:/Users/BB/Pictures/images_bb.jfif"), (700, 500))
-background1 = transform.scale(image.load("C:\\Users\BB\\Pictures\\wallpaper\\yyu.jpg"), (700, 500))
+background = transform.scale(image.load("assets/background.jpg"), (1200, 800))
 print("\t__\n__")
 window.blit(background, (0,0))
 # window.blit(background1, (250,250))
 
-c1 = CharacterSprite('C:\\Users\\BB\\Documents\\GitHub\\PyQt\\demos\\Pygame\\Cave_Vines.webp', 100, 100, 2)
-c2 = EnemySprite('C:\\Users\\BB\\Documents\\GitHub\\PyQt\\demos\\Pygame\\spider.webp', 100, 50, 1)
+c1 = CharacterSprite('assets/Cave_Vines.webp', 100, 100, 1)
+c2 = EnemySprite('assets/spider.webp', 100, 50, 0.5)
 
+lavas = []
+for i in range(5):
+    lava = Wall("assets/lava.jpeg",200+i*65,200)
+    lavas.append(lava)
+
+
+clock = time.Clock()
+FPS = 144
 game = True 
 while game:
     
@@ -25,9 +32,14 @@ while game:
            game = False
     c1.update(window)
     c2.update(window)
+    for lava in lavas:
+        lava.update(window)
+        if c1.collide(lava):
+            c1.reset(window)
     c2.move_horizontal()
     if c1.collide(c2):
         print("Colision detected")
     c1.handle_events()
     
     display.update()
+    clock.tick(FPS)
